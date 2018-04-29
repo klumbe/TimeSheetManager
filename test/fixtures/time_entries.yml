@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2018-04-29
+  start: 2018-04-29 17:09:01
+  end: 2018-04-29 17:09:01
+  breaks: 2018-04-29 17:09:01
+  total: 2018-04-29 17:09:01
+
+two:
+  date: 2018-04-29
+  start: 2018-04-29 17:09:01
+  end: 2018-04-29 17:09:01
+  breaks: 2018-04-29 17:09:01
+  total: 2018-04-29 17:09:01
