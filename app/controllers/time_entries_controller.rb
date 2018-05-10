@@ -15,6 +15,7 @@ class TimeEntriesController < ApplicationController
   # GET /time_entries/new
   def new
     @time_entry = TimeEntry.new
+    set_default_times()
   end
 
   # GET /time_entries/1/edit
@@ -70,5 +71,21 @@ class TimeEntriesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def time_entry_params
       params.require(:time_entry).permit(:date, :start, :end, :breaks, :total)
+    end
+
+    def set_default_times
+      now = Time.current
+      defaults = {
+        start: {hour: 9, minute: 0},
+        breaks: {hour: 0, minute: 45},
+      }
+
+      @time_entry.date = now
+      @time_entry.start = Time.zone.local(now.year, now.month, now.day, defaults[:start][:hour], defaults[:start][:minute])
+      @time_entry.end = TimeEntry.round_time(now)
+      @time_entry.breaks = Time.zone.local(now.year, now.month, now.day, defaults[:breaks][:hour], defaults[:breaks][:minute])
+      time_diff = @time_entry.end - @time_entry.start
+      total_time = time_diff - @time_entry.breaks.to_f
+      @time_entry.total = Time.zone.at(total_time)
     end
 end
