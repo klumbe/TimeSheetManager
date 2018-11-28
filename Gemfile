@@ -64,6 +64,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # Add Bootstrap requirements
 gem 'bootstrap', '~> 4.1.3'
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem 'momentjs-rails'
+gem 'bootstrap4-datetime-picker-rails'
 
 # Add Devise for user authentication
 gem 'devise', '~> 4.5.0'
