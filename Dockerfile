@@ -2,7 +2,10 @@ FROM ruby:2.5
 
 RUN apt-get update && apt-get install -y \
   build-essential \
-  nodejs
+  apt-utils
+
+RUN curl -sL https://deb.nodesource.com/setup_11.x | bash -
+RUN apt-get install -y nodejs
 
 RUN mkdir -p /app
 WORKDIR /app
