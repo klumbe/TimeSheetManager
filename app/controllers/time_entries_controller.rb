@@ -77,13 +77,14 @@ class TimeEntriesController < ApplicationController
       now = Time.current
       defaults = {
         start: {hour: 9, minute: 0},
+        end: {hour: 17, minute: 45},
         breaks: {hour: 0, minute: 45},
       }
 
       @time_entry.date = now
-      @time_entry.start = Time.zone.local(now.year, now.month, now.day, defaults[:start][:hour], defaults[:start][:minute])
-      @time_entry.end = TimeEntry.round_time(now)
-      @time_entry.breaks = Time.zone.local(now.year, now.month, now.day, defaults[:breaks][:hour], defaults[:breaks][:minute])
+      @time_entry.start = helpers.default_to_date(defaults, :start)
+      @time_entry.end = TimeEntry.round_time(helpers.default_to_date(defaults, :end))
+      @time_entry.breaks = helpers.default_to_date(defaults, :breaks)
       time_diff = @time_entry.end - @time_entry.start
       total_time = time_diff - @time_entry.breaks.to_f
       @time_entry.total = Time.zone.at(total_time)
