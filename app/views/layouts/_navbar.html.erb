@@ -10,5 +10,17 @@
         <a class="nav-link" href="<%= time_entries_path %>">Entries <%= sanitize(add_span(time_entries_path)) %></a>
       </li>
     </ul>
+    <ul class="nav navbar-nav navbar-right">
+	    <li class="nav-item">
+		<%= link_to  new_user_registration_path, class: 'nav-link' do %>
+			<%= icon 'fa', 'user-plus' %> Sign Up
+		<% end %>
+	    </li>
+	    <li class="nav-item">
+		<%= link_to  new_user_session_path, class: 'nav-link' do %>
+			<%= icon 'fa', 'sign-in-alt' %> Sign In
+		<% end %>
+	    </li>
+    </ul>
   </div>
 </nav>
