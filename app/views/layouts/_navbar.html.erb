@@ -13,10 +13,14 @@
     <ul class="nav navbar-nav navbar-right">
     	<% if user_signed_in? %>
           <li class="nav-item">
-         <%= link_to current_user.email, edit_user_registration_path, class: 'nav-link' %>
+         <%= link_to edit_user_registration_path, class: 'nav-link' do %>
+           <%= icon 'fa', 'user-cog' %> <%= current_user.email %>
+         <% end %>
           </li>
           <li class="nav-item">
-         <%= link_to "Logout", destroy_user_session_path, method: 'delete', class: 'nav-link' %>
+         <%= link_to destroy_user_session_path, method: 'delete', class: 'nav-link' do %>
+           <%= icon 'fa', 'sign-out-alt' %> Logout
+         <% end %>
           </li>
       <% else %>
           <li class="nav-item">
