@@ -20,9 +20,21 @@
         <td><%= time_entry.end.to_formatted_s(:time)  %></td>
         <td><%= time_entry.breaks.to_formatted_s(:time)  %></td>
         <td><%= time_entry.total.to_formatted_s(:time) %></td>
-        <td><%= link_to 'Show', time_entry %></td>
-        <td><%= link_to 'Edit', edit_time_entry_path(time_entry) %></td>
-        <td><%= link_to 'Destroy', time_entry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= link_to time_entry do %>
+            <%= icon "far", "eye" %> Show
+          <% end %>
+        </td>
+        <td>
+          <%= link_to edit_time_entry_path(time_entry) do %>
+            <%= icon "fa", "pen" %> Edit
+          <% end %>
+        </td>
+        <td>
+          <%= link_to time_entry, method: :delete, data: { confirm: 'Are you sure?' } do %>
+            <%= icon "fa", "trash-alt" %> Destroy
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +42,6 @@
 
 <br>
 
-<%= link_to 'New Time Entry', new_time_entry_path %>
+<%= link_to new_time_entry_path do %>
+  <%= icon 'fa', 'plus' %> New Time Entry
+<% end %>
