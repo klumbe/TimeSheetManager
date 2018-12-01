@@ -21,7 +21,7 @@
         <td><%= time_entry.start.to_formatted_s(:time) %></td>
         <td><%= time_entry.end.to_formatted_s(:time)  %></td>
         <td><%= time_entry.breaks.to_formatted_s(:time)  %></td>
-        <td><%= time_entry.total %></td>
+        <td><%= time_entry.total.to_formatted_s(:time) %></td>
         <td><%= link_to 'Show', time_entry %></td>
         <td><%= link_to 'Edit', edit_time_entry_path(time_entry) %></td>
         <td><%= link_to 'Destroy', time_entry, method: :delete, data: { confirm: 'Are you sure?' } %></td>

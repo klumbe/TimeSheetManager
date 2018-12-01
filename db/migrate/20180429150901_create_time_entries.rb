@@ -5,7 +5,6 @@ class CreateTimeEntries < ActiveRecord::Migration[5.2]
       t.time :start
       t.time :end
       t.time :breaks
-      t.time :total
 
       t.timestamps
     end

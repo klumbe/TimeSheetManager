@@ -25,7 +25,7 @@ class TimeEntriesController < ApplicationController
   # POST /time_entries
   # POST /time_entries.json
   def create
-    @time_entry = TimeEntry.new(time_entry_params)
+    @time_entry = current_user.time_entries.new(time_entry_params)
 
     respond_to do |format|
       if @time_entry.save

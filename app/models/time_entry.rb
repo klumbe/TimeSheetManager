@@ -1,4 +1,12 @@
 class TimeEntry < ApplicationRecord
+  belongs_to :user
+
+  def total
+    return Time.zone.at(self[:end] - self[:start] - (self[:breaks].hour * 3600 + self[:breaks].min * 60))
+  end
+
+  def total=(total)
+  end
 
   def self.round_time(time)
     step = 15
@@ -9,4 +17,5 @@ class TimeEntry < ApplicationRecord
     end
     return new_time
   end
+
 end
