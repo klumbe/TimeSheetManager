@@ -1,29 +1,29 @@
-<p id="notice"><%= notice %></p>
+<table class="table table-striped">
+  <tr>
+    <th>Date:</th>
+    <td><%= @time_entry.date.to_formatted_s(:date) %></td>
+  </tr>
 
-<p>
-  <strong>Date:</strong>
-  <%= @time_entry.date %>
-</p>
+  <tr>
+    <th>Start:</th>
+    <td><%= @time_entry.start.to_formatted_s(:time) %>
+  </tr>
 
-<p>
-  <strong>Start:</strong>
-  <%= @time_entry.start %>
-</p>
+  <tr>
+    <th>End:</th>
+    <td><%= @time_entry.end.to_formatted_s(:time) %>
+  </tr>
 
-<p>
-  <strong>End:</strong>
-  <%= @time_entry.end %>
-</p>
+  <tr>
+    <th>Breaks:</th>
+    <td><%= @time_entry.breaks.to_formatted_s(:time) %>
+  </tr>
 
-<p>
-  <strong>Breaks:</strong>
-  <%= @time_entry.breaks %>
-</p>
+  <tr>
+    <th>Total:</th>
+    <td><%= @time_entry.total.to_formatted_s(:time) %></td>
+  </tr>
 
-<p>
-  <strong>Total:</strong>
-  <%= @time_entry.total %>
-</p>
-
+</table>
 <%= link_to 'Edit', edit_time_entry_path(@time_entry) %> |
 <%= link_to 'Back', time_entries_path %>
