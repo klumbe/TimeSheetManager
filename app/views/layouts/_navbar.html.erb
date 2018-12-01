@@ -11,16 +11,25 @@
       </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-	    <li class="nav-item">
-		<%= link_to  new_user_registration_path, class: 'nav-link' do %>
-			<%= icon 'fa', 'user-plus' %> Sign Up
-		<% end %>
-	    </li>
-	    <li class="nav-item">
-		<%= link_to  new_user_session_path, class: 'nav-link' do %>
-			<%= icon 'fa', 'sign-in-alt' %> Login
-		<% end %>
-	    </li>
+    	<% if user_signed_in? %>
+          <li class="nav-item">
+         <%= link_to current_user.email, edit_user_registration_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+         <%= link_to "Logout", destroy_user_session_path, method: 'delete', class: 'nav-link' %>
+          </li>
+      <% else %>
+          <li class="nav-item">
+            <%= link_to  new_user_registration_path, class: 'nav-link' do %>
+              <%= icon 'fa', 'user-plus' %> Sign Up
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to  new_user_session_path, class: 'nav-link' do %>
+              <%= icon 'fa', 'sign-in-alt' %> Login
+            <% end %>
+          </li>
+      <% end %>
     </ul>
   </div>
 </nav>
