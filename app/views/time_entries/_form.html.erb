@@ -1,3 +1,4 @@
+<% date_options = {minute_step: 15} %>
 <%= form_with(model: time_entry, local: true) do |form| %>
   <% if time_entry.errors.any? %>
     <div id="error_explanation">
@@ -12,28 +13,28 @@
   <% end %>
 
   <div class="form-group">
-    <%= form.label :date %>
-    <%= form.date_select :date %>
+	  <%= form.label :date %>
+	  <%= form.date_select :date, {}, {class: 'custom-select custom-control-inline col-md-2'} %>
   </div>
 
   <div class="form-group">
-    <%= form.label :start %>
-    <%= form.time_select :start%>
+	  <%= form.label :start %>
+    <%= form.time_select :start, date_options, {class: 'custom-select custom-control-inline col-md-2'} %>
   </div>
 
   <div class="form-group">
     <%= form.label :end %>
-    <%= form.time_select :end %>
+    <%= form.time_select :end, date_options, {class: 'custom-select custom-control-inline col-md-2'} %>
   </div>
 
   <div class="form-group">
     <%= form.label :breaks %>
-    <%= form.time_select :breaks%>
+    <%= form.time_select :breaks, date_options, {class: 'custom-select custom-control-inline col-md-2'} %>
   </div>
 
   <div class="form-group">
     <%= form.label :total %>
-    <%= form.time_select :total, {} , disabled: true %>
+    <%= form.time_select :total, date_options, {disabled: true, class: 'custom-select custom-control-inline col-md-2'} %>
   </div>
 
   <div class="actions">
