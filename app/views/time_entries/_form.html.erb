@@ -34,7 +34,9 @@
 
   <div class="form-group">
     <%= form.label :total %>
-    <%= form.time_select :total, date_options, {disabled: true, class: 'custom-select custom-control-inline col-md-2'} %>
+    <span id="time_entry_total" class="">
+      <%= time_entry.total.to_formatted_s(:time) %>
+    </span>
   </div>
 
   <div class="actions">

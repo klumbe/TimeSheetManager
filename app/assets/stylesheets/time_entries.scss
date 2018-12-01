@@ -2,10 +2,15 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .form-group {
-  label { 
+  label {
     display: block;
   }
   .custom-control-inline {
   	margin-right: 0rem;
   }
+}
+
+#time_entry_total {
+  font-size: 2rem;
+  font-weight: bold;
 }
