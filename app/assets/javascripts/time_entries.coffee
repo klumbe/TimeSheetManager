@@ -16,6 +16,7 @@ set_total = ->
     $("#time_entry_total").text("00:00");
     $("#time_entry_total").addClass("text-danger")
   else
+    $("#time_entry_total").removeClass("text-danger")
     total_min = (total % 60) + "";
     total_hour = ((total - total_min) / 60) + "";
     if total_min.length < 2
