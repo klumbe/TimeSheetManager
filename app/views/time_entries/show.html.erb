@@ -1,3 +1,4 @@
+<% if user_allowed? %>
 <table class="table table-striped">
   <tr>
     <th>Date:</th>
@@ -25,5 +26,6 @@
   </tr>
 
 </table>
+<% end %>
 <%= link_to 'Edit', edit_time_entry_path(@time_entry) %> |
 <%= link_to 'Back', time_entries_path %>

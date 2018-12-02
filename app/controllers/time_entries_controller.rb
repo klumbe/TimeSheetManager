@@ -1,10 +1,11 @@
 class TimeEntriesController < ApplicationController
   before_action :set_time_entry, only: [:show, :edit, :update, :destroy]
+  after_action :remove_alert
 
   # GET /time_entries
   # GET /time_entries.json
   def index
-    @time_entries = TimeEntry.all
+    @time_entries = TimeEntry.where(user_id: current_user.id)
   end
 
   # GET /time_entries/1
@@ -88,5 +89,9 @@ class TimeEntriesController < ApplicationController
       time_diff = @time_entry.end - @time_entry.start
       total_time = time_diff - @time_entry.breaks.to_f
       @time_entry.total = Time.zone.at(total_time)
+    end
+
+    def remove_alert
+      flash[:alert] = nil
     end
 end
