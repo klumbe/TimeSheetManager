@@ -1,16 +1,8 @@
 <div id="pagination">
-  <div id="years">
-    <ul>
-    <% @years.each do |year| %>
-      <li><%= link_to year, time_entries_path(year: year) %></li>
-    <% end %>
-    </ul>
-  </div>
-  <div id="months">
-    <ul>
-      <% @months.each do |month| %>
-        <li><%= link_to Date::MONTHNAMES[month], time_entries_path(month: month) %></li>
-      <% end %>
-    </ul>
-  </div>
+  <nav aria-label="Page navigation years">
+    <%= render partial: 'pagination_items', locals: {items: @years, hash: @filter, type: :year} %>
+  </nav>
+  <nav aria-label="Page navigation months">
+    <%= render partial: 'pagination_items', locals: {items: @months, hash: @filter, type: :month} %>
+  </nav>
 </div>

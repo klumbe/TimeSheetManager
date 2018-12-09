@@ -1,0 +1,19 @@
+<ul class="pagination">
+<% items.each do |item| %>
+  <% active = hash[type] == item %>
+  <% if active %>
+  <li class="page-item active">
+  <% else %>
+  <li class="page-item">
+  <% end %>
+    <% hash_clone = hash.clone %>
+    <% hash_clone[type] = item %>
+    <% hash_clone[:month] = get_existing_month(hash_clone[:year], hash_clone[:month]) %>
+    <% link_to_label = type == :month ? Date::MONTHNAMES[item] : item %>
+    <%= link_to link_to_label, time_entries_path(hash_clone), class: 'page-link' %>
+    <% if active %>
+      <span class="sr-only">(current)</span>
+    <% end %>
+  </li>
+<% end %>
+</ul>

@@ -5,17 +5,33 @@ class TimeEntriesController < ApplicationController
   # GET /time_entries
   # GET /time_entries.json
   def index
-    @years = TimeEntry.where(user_id: current_user.id).select(:date).order(date: :desc).group_by { |te| te.date.year }.keys
-    @months = TimeEntry.where(user_id: current_user.id).select(:date).order(date: :desc).group_by { |te| te.date.month }.keys
+    year_list = TimeEntry.where(user_id: current_user.id).select(:date).order(date: :desc).group_by { |te| te.date.year }
+    @years = year_list.keys
 
-    @time_entries = TimeEntry.where(user_id: current_user.id).order(date: :asc)
+    time_entries_all = TimeEntry.where(user_id: current_user.id).order(date: :asc)
+    @time_entries = time_entries_all
+
+    # create filter-hash for maintaining current filter
+    @filter = {}
 
     if params[:year]
-      @time_entries = @time_entries.in_year(params[:year])
+      @year = params[:year].to_i
+    else
+      @year = year_list.keys.first
     end
+
+    @filter[:year] = @year
+    @time_entries = @time_entries.in_year(@year)
+    @months = @time_entries.group_by {|te| te.date.month }.keys
+
     if params[:month]
-      @time_entries = @time_entries.in_month(params[:month])
+      @month = params[:month].to_i
+      @time_entries = @time_entries.in_month(@month)
+    else
+      @month = @months.first
     end
+    @filter[:month] = @month
+
   end
 
   # GET /time_entries/1
