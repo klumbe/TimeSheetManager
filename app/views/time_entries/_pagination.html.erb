@@ -1,0 +1,16 @@
+<div id="pagination">
+  <div id="years">
+    <ul>
+    <% @years.each do |year| %>
+      <li><%= link_to year, time_entries_path(year: year) %></li>
+    <% end %>
+    </ul>
+  </div>
+  <div id="months">
+    <ul>
+      <% @months.each do |month| %>
+        <li><%= link_to Date::MONTHNAMES[month], time_entries_path(month: month) %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>

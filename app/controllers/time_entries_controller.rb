@@ -5,7 +5,17 @@ class TimeEntriesController < ApplicationController
   # GET /time_entries
   # GET /time_entries.json
   def index
-    @time_entries = TimeEntry.where(user_id: current_user.id)
+    @years = TimeEntry.where(user_id: current_user.id).select(:date).order(date: :desc).group_by { |te| te.date.year }.keys
+    @months = TimeEntry.where(user_id: current_user.id).select(:date).order(date: :desc).group_by { |te| te.date.month }.keys
+
+    @time_entries = TimeEntry.where(user_id: current_user.id).order(date: :asc)
+
+    if params[:year]
+      @time_entries = @time_entries.in_year(params[:year])
+    end
+    if params[:month]
+      @time_entries = @time_entries.in_month(params[:month])
+    end
   end
 
   # GET /time_entries/1
@@ -71,7 +81,7 @@ class TimeEntriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def time_entry_params
-      params.require(:time_entry).permit(:date, :start, :end, :breaks, :total)
+      params.require(:time_entry).permit(:date, :start, :end, :breaks, :total, :year, :month)
     end
 
     def set_default_times
