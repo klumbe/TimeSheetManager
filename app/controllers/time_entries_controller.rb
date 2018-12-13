@@ -16,7 +16,7 @@ class TimeEntriesController < ApplicationController
 
     if params[:year]
       @year = params[:year].to_i
-    else
+    elsif !params[:month]
       @year = year_list.keys.first
     end
 
@@ -27,7 +27,7 @@ class TimeEntriesController < ApplicationController
     if params[:month]
       @month = params[:month].to_i
       @time_entries = @time_entries.in_month(@month)
-    else
+    elsif !params[:year]
       @month = @months.first
     end
     @filter[:month] = @month
