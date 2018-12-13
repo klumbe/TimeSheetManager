@@ -1,6 +1,18 @@
 <ul class="pagination">
+<% hash_clone = hash.clone %>
+<% if hash_clone[type] == 'all' %>
+  <li class="page-item active">
+<% else %>
+  <li class="page-item">
+<% end %>
+    <% hash_clone[type] = 'all' %>
+    <%= link_to 'All', time_entries_path(hash_clone), class: 'page-link' %>
+    <% if hash_clone[type] == 'all' %>
+      <span class="sr-only">(current)</span>
+    <% end %>
+  </li>
 <% items.each do |item| %>
-  <% active = hash[type] == item %>
+  <% active = hash[type] == item.to_s %>
   <% if active %>
   <li class="page-item active">
   <% else %>

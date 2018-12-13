@@ -15,22 +15,29 @@ class TimeEntriesController < ApplicationController
     @filter = {}
 
     if params[:year]
-      @year = params[:year].to_i
+      @year = params[:year]
     elsif !params[:month]
       @year = year_list.keys.first
     end
 
     @filter[:year] = @year
-    @time_entries = @time_entries.in_year(@year)
+    if !@year.nil? && !(@year == 'all')
+      @time_entries = @time_entries.in_year(@year)
+    end
     @months = @time_entries.group_by {|te| te.date.month }.keys
 
     if params[:month]
-      @month = params[:month].to_i
-      @time_entries = @time_entries.in_month(@month)
+      @month = params[:month]
+      if !@month.nil? && !(@month == 'all')
+        @time_entries = @time_entries.in_month(@month)
+      end
     elsif !params[:year]
       @month = @months.first
     end
-    @filter[:month] = @month
+
+    if !@month.nil?
+      @filter[:month] = @month
+    end
 
   end
 

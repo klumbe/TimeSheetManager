@@ -8,7 +8,11 @@ module TimeEntriesHelper
   # returns existing month in supplied year (can be the supplied month)
   def get_existing_month(year, month)
     new_month = month
-    entries_in_year = TimeEntry.in_year(year)
+    if year == 'all'
+      entries_in_year = TimeEntry.all
+    else
+      entries_in_year = TimeEntry.in_year(year)
+    end
     if entries_in_year.in_month(month).empty?
       new_month = entries_in_year.group_by {|te| te.date.month}.keys.first
     end
