@@ -20,7 +20,9 @@
   <% end %>
     <% hash_clone = hash.clone %>
     <% hash_clone[type] = item %>
-    <% hash_clone[:month] = get_existing_month(hash_clone[:year], hash_clone[:month]) %>
+    <% if !(hash_clone[:month] == 'all') %>
+      <% hash_clone[:month] = get_existing_month(hash_clone[:year], hash_clone[:month]) %>
+    <% end %>
     <% link_to_label = type == :month ? Date::MONTHNAMES[item] : item %>
     <%= link_to link_to_label, time_entries_path(hash_clone), class: 'page-link' %>
     <% if active %>
