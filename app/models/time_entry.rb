@@ -1,7 +1,9 @@
 class TimeEntry < ApplicationRecord
   belongs_to :user
 
-  validate :end_time_cannot_be_lower_than_start_time, :total_cannot_be_negative
+  validate :end_time_cannot_be_lower_than_start_time, 
+           :total_cannot_be_negative, 
+           :cannot_overlap
 
   scope :in_year, ->(year) {where( "EXTRACT(year FROM date) = ?", year.to_s)}
   scope :in_month, ->(month) {where( "EXTRACT(month FROM date) = ?", month)}
@@ -31,6 +33,14 @@ class TimeEntry < ApplicationRecord
   def total_cannot_be_negative
     if total_minutes < 0
       errors.add(:total, "can't be negative")
+    end
+  end
+
+  def cannot_overlap
+    matches = TimeEntry.where("date = ? AND ((? >= start AND ? <= \"end\") OR (? >= start AND ? <= \"end\"))",  self[:date], self[:start], self[:start], self[:end], self[:end])
+    
+    if !matches.empty?
+      errors.add(:date, "cannot contain overlapping times")
     end
   end
 
