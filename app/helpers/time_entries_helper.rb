@@ -28,4 +28,13 @@ module TimeEntriesHelper
     end
     return allowed
   end
+
+  # check if it is the last entry of the month and if the list contains more entries
+  # used to insert separation line between months
+  def requires_month_separation?(date, pos, list_size)
+    last_day = date.day == Time.days_in_month(date.month, date.year)
+    last_item = pos == (list_size - 1)
+  
+    return (!last_item && last_day)
+  end
 end

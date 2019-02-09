@@ -14,8 +14,12 @@
   </thead>
 
   <tbody>
-    <% @time_entries.each do |time_entry| %>
+    <% @time_entries.each_with_index do |time_entry, i| %>
+      <% if requires_month_separation?(time_entry.date, i, @time_entries.size) %>
+      <tr class = "tr_month_sep">
+      <% else %>
       <tr>
+      <% end %>
         <td><%= time_entry.date %></td>
         <td><%= time_entry.start.to_formatted_s(:time) %></td>
         <td><%= time_entry.end.to_formatted_s(:time)  %></td>
