@@ -1,0 +1,33 @@
+<ul class="pagination">
+<% hash_clone = hash.clone %>
+<% if hash_clone[type] == 'all' %>
+  <li class="page-item active">
+<% else %>
+  <li class="page-item">
+<% end %>
+    <% hash_clone[type] = 'all' %>
+    <%= link_to 'All', time_entries_path(hash_clone), class: 'page-link' %>
+    <% if hash_clone[type] == 'all' %>
+      <span class="sr-only">(current)</span>
+    <% end %>
+  </li>
+<% items.each do |item| %>
+  <% active = hash[type].to_s == item.to_s %>
+  <% if active %>
+  <li class="page-item active">
+  <% else %>
+  <li class="page-item">
+  <% end %>
+    <% hash_clone = hash.clone %>
+    <% hash_clone[type] = item %>
+    <% if !(hash_clone[:month] == 'all') %>
+      <% hash_clone[:month] = get_existing_month(hash_clone[:year], hash_clone[:month]) %>
+    <% end %>
+    <% link_to_label = type == :month ? Date::MONTHNAMES[item] : item %>
+    <%= link_to link_to_label, time_entries_path(hash_clone), class: 'page-link' %>
+    <% if active %>
+      <span class="sr-only">(current)</span>
+    <% end %>
+  </li>
+<% end %>
+</ul>

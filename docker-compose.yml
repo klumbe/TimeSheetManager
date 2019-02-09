@@ -1,0 +1,21 @@
+version: '3'
+services:
+        postgres:
+                image: postgres
+                volumes:
+                        - ./tmp/db:/var/lib/postgresql/data
+                networks:
+                        - network
+                restart: on-failure
+        web:
+                build: .
+                command: bash -c "cd /app &&  bundle exec rails server -b '0.0.0.0'"
+                ports:
+                        - "3000:3000"
+                depends_on:
+                        - "postgres"
+                networks:
+                        - network
+                restart: on-failure
+networks:
+        network:

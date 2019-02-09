@@ -5,7 +5,42 @@ class TimeEntriesController < ApplicationController
   # GET /time_entries
   # GET /time_entries.json
   def index
-    @time_entries = TimeEntry.where(user_id: current_user.id)
+    year_list = TimeEntry.where(user_id: current_user.id).select(:date).order(date: :desc).group_by { |te| te.date.year }
+    @years = year_list.keys
+
+    time_entries_all = TimeEntry.where(user_id: current_user.id).order(date: :asc)
+    @time_entries = time_entries_all
+
+    # create filter-hash for maintaining current filter
+    @filter = {}
+
+    if params[:year]
+      @year = params[:year]
+    elsif !params[:month]
+      @year = year_list.keys.first
+    end
+
+    @filter[:year] = @year
+    if !@year.nil? && !(@year == 'all')
+      @time_entries = @time_entries.in_year(@year)
+    end
+    @months = @time_entries.group_by {|te| te.date.month }.keys
+
+    if params[:month]
+      @month = params[:month]
+      if !@month.nil? && !(@month == 'all')
+        @time_entries = @time_entries.in_month(@month)
+      end
+    elsif !params[:year]
+      @month = @months.last
+    end
+
+    if !@month.nil?
+      @filter[:month] = @month
+      if !(@month == 'all')
+        @time_entries = @time_entries.in_month(@month)
+      end
+    end
   end
 
   # GET /time_entries/1
@@ -71,7 +106,7 @@ class TimeEntriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def time_entry_params
-      params.require(:time_entry).permit(:date, :start, :end, :breaks, :total)
+      params.require(:time_entry).permit(:date, :start, :end, :breaks, :total, :year, :month)
     end
 
     def set_default_times

@@ -3,6 +3,9 @@ class TimeEntry < ApplicationRecord
 
   validate :end_time_cannot_be_lower_than_start_time, :total_cannot_be_negative
 
+  scope :in_year, ->(year) {where( "EXTRACT(year FROM date) = ?", year.to_s)}
+  scope :in_month, ->(month) {where( "EXTRACT(month FROM date) = ?", month)}
+
   def total
     if total_minutes < 0
       return Time.zone.at(0)

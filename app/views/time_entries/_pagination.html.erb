@@ -1,0 +1,8 @@
+<div id="pagination">
+  <nav aria-label="Page navigation years">
+    <%= render partial: 'pagination_items', locals: {items: @years, hash: @filter, type: :year} %>
+  </nav>
+  <nav aria-label="Page navigation months">
+    <%= render partial: 'pagination_items', locals: {items: @months, hash: @filter, type: :month} %>
+  </nav>
+</div>

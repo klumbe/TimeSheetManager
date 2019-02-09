@@ -14,8 +14,8 @@ COPY Gemfile Gemfile.lock ./
 RUN gem install bundler && bundle install
 
 COPY . /app
-RUN bundle exec rake db:migrate
+#RUN bundle exec rake db:migrate
 
 EXPOSE 3000
 
-CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
+#CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
