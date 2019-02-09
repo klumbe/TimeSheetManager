@@ -32,13 +32,15 @@ class TimeEntriesController < ApplicationController
         @time_entries = @time_entries.in_month(@month)
       end
     elsif !params[:year]
-      @month = @months.first
+      @month = @months.last
     end
 
     if !@month.nil?
       @filter[:month] = @month
+      if !(@month == 'all')
+        @time_entries = @time_entries.in_month(@month)
+      end
     end
-
   end
 
   # GET /time_entries/1
