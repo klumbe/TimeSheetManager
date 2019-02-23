@@ -1,47 +1,67 @@
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
+<div class="row">
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'col-md-5' }) do |f| %>
+    <%= devise_error_messages! %>
 
-  <div class="form-group">
-    <%= f.label :email %>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
-  </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text"><i class="fas fa-user"></i></span>
+      </div>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "email address", class: 'form-control' %>
+    </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="form-group">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i>
-    <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
     <% end %>
-  </div>
 
-  <div class="form-group">
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
-  </div>
+    <% if @minimum_password_length %>
+    <div class="input-group">
+    <% else %>
+    <div class="input-group mb-5">
+    <% end %>
+      <div class="input-group-prepend">
+        <span class="input-group-text"><i class="fas fa-key"></i></span>
+      </div>
+      <%= f.password_field :password, autocomplete: "new-password", placeholder: "new password", class: 'form-control', 'aria-describedby': 'passwordHelpBlock' %>
+    </div>
+    <% if @minimum_password_length %>
+      <small id="passwordHelpBlock" class="form-text text-muted">
+        Your password needs to be at least <b><%= @minimum_password_length %></b> characters long.
+      </small>
+    <% end %>
 
-  <div class="form-group">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i>
-    <%= f.password_field :current_password, autocomplete: "current-password", class: 'form-control' %>
-  </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text"><i class="fas fa-key"></i></span>
+      </div>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "repeat new password", class: 'form-control' %>
+    </div>
 
-  <div class="actions">
-    <%= f.button "Update", type: 'submit', class: 'btn btn-primary' %>
-  </div>
-<% end %>
+    Your current password is needed to be able to change it:
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text"><i class="fas fa-key"></i></span>
+      </div>
+      <%= f.password_field :current_password, autocomplete: "current-password", placeholder: "enter your current password", class: 'form-control' %>
+    </div>
+
+    <div class="actions mb-3">
+      <%= f.button "Update", type: 'submit', class: 'btn btn-primary btn-block' %>
+    </div>
+  <% end %>
+</div>
 
 <h3>Cancel my account</h3>
 
-<p>Unhappy?
-  <%= button_to registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger' do %>
-    Cancel my account
-  <% end %>
-</p>
+<div class="devise_links row mb-3 mt-3">
+  <div class="col-md-5">
+    <p>Unhappy?
+      <%= button_to registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger btn-block' do %>
+        Cancel my account
+      <% end %>
+    </p>
 
-<%= link_to "Back", :back %>
+    <%= link_to "Back", :back %>
+  </div>
+</div>
