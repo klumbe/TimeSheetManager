@@ -1,0 +1,47 @@
+<%= form_with(model: log, local: true) do |form| %>
+  <% if log.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(log.errors.count, "error") %> prohibited this log from being saved:</h2>
+
+      <ul>
+      <% log.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :table %>
+    <%= form.text_field :table %>
+  </div>
+
+  <div class="field">
+    <%= form.label :row %>
+    <%= form.number_field :row %>
+  </div>
+
+  <div class="field">
+    <%= form.label :column %>
+    <%= form.text_field :column %>
+  </div>
+
+  <div class="field">
+    <%= form.label :changed_to %>
+    <%= form.text_field :changed_to %>
+  </div>
+
+  <div class="field">
+    <%= form.label :changed_at %>
+    <%= form.datetime_select :changed_at %>
+  </div>
+
+  <div class="field">
+    <%= form.label :changed_by %>
+    <%= form.number_field :changed_by %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

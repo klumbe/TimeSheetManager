@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  table: MyString
+  row: 1
+  column: MyString
+  changed_to: MyString
+  changed_at: 2019-02-24 21:38:39
+  changed_by: 1
+
+two:
+  table: MyString
+  row: 1
+  column: MyString
+  changed_to: MyString
+  changed_at: 2019-02-24 21:38:39
+  changed_by: 1
