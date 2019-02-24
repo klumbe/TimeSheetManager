@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  resources :logs
+  get 'logs/', to: 'logs#index'
+  get 'logs/:id', to: 'logs#show'
+
   devise_for :users
   root to: 'time_entries#index'
 
