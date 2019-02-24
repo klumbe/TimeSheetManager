@@ -1,4 +1,4 @@
-FROM ruby:2.5
+FROM ruby:2.6.1
 
 RUN apt-get update && apt-get install -y \
   build-essential \
@@ -10,6 +10,7 @@ RUN apt-get install -y nodejs
 RUN mkdir -p /app
 WORKDIR /app
 
+RUN gem update --system
 COPY Gemfile Gemfile.lock ./
 RUN gem install bundler && bundle install
 
