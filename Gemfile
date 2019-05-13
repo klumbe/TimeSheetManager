@@ -70,5 +70,8 @@ gem 'jquery-rails'
 # Add Devise for user authentication
 gem 'devise', '~> 4.5.0'
 
+# Use Oauth2 with Azure AD by Omniauth
+gem 'omniauth-azure-oauth2'
+
 # Add FontAwesome capabilities
 gem 'font-awesome-sass', '~> 5.5.0'
