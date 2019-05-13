@@ -37,7 +37,7 @@ class TimeEntry < ApplicationRecord
   end
 
   def cannot_overlap
-    matches = TimeEntry.where("date = ? AND ((? >= start AND ? <= \"end\") OR (? >= start AND ? <= \"end\"))",  self[:date], self[:start], self[:start], self[:end], self[:end])
+    matches = TimeEntry.where("user_id = ? AND date = ? AND ((? >= start AND ? <= \"end\") OR (? >= start AND ? <= \"end\"))",  self[:user_id], self[:date], self[:start], self[:start], self[:end], self[:end])
     
     if !matches.empty?
       errors.add(:date, "cannot contain overlapping times")
