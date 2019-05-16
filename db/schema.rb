@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_01_175203) do
+ActiveRecord::Schema.define(version: 2019_05_16_100323) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "auth_providers", force: :cascade do |t|
+    t.string "provider"
+    t.string "uid"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_auth_providers_on_user_id"
+  end
 
   create_table "time_entries", force: :cascade do |t|
     t.date "date"
@@ -34,4 +46,5 @@ ActiveRecord::Schema.define(version: 2018_12_01_175203) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "auth_providers", "users"
 end

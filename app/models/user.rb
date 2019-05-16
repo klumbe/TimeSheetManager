@@ -5,4 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :time_entries
+  has_many :auth_providers, dependent: :destroy
 end
