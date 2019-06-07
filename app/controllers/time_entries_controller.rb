@@ -15,7 +15,8 @@ class TimeEntriesController < ApplicationController
     # create filter-hash for maintaining current filter
     @filter = {}
 
-    if params[:year]
+    @year = 'all'
+    if params[:year] && params[:year].match(/\d+/)
       @year = params[:year]
     elsif !params[:month]
       if @years_order == :desc
@@ -31,7 +32,7 @@ class TimeEntriesController < ApplicationController
     end
     @months = @time_entries.group_by {|te| te.date.month }.keys
 
-    if params[:month]
+    if params[:month] && params[:month].match(/\d+/)
       @month = params[:month]
       if !@month.nil? && !(@month == 'all')
         @time_entries = @time_entries.in_month(@month)

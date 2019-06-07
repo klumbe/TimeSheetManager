@@ -13,6 +13,7 @@
   </li>
 <% max_items_visible = 3 %>
 <% active_item = hash[type] != 'all' ? hash[type].to_i : nil %>
+<% active_item_index = active_item ? items.index(active_item) : nil %>
 <% items.each_with_index do |item, i| %>
   <% active = active_item == item %>
   <% link_to_label = time_unit_to_str(type, item) %>
@@ -36,7 +37,7 @@
     </li>
   <% elsif i == max_items_visible %>
     <% dropdown_class = 'page-item dropdown' %>
-    <% if active_item && items.index(active_item) >= max_items_visible %>
+    <% if active_item &&  active_item_index && active_item_index >= max_items_visible %>
       <% active_link = time_unit_to_str(type, active_item) %>
         <% dropdown_class += ' active' %>
     <% else %>
