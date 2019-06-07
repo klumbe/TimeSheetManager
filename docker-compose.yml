@@ -6,7 +6,7 @@ services:
                         - ./tmp/db:/var/lib/postgresql/data
                 networks:
                         - network
-                restart: on-failure
+                restart: always
         web:
                 build: .
                 command: bash -c "cd /app &&  bundle exec rails server -b '0.0.0.0'"
@@ -15,9 +15,9 @@ services:
                 ports:
                         - "3000:3000"
                 depends_on:
-                        - "postgres"
+                        - postgres
                 networks:
                         - network
-                restart: on-failure
+                restart: always
 networks:
         network:
