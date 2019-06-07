@@ -34,7 +34,13 @@ module TimeEntriesHelper
   def requires_month_separation?(date, pos, list_size)
     last_day = date.day == Time.days_in_month(date.month, date.year)
     last_item = pos == (list_size - 1)
-  
+
     return (!last_item && last_day)
+  end
+
+  # returns the string representation of months or years
+  # dependent on the type parameter
+  def time_unit_to_str(type, time_unit)
+    return type == :month ? Date::MONTHNAMES[time_unit] : time_unit
   end
 end

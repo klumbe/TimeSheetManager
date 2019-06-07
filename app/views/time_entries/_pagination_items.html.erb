@@ -11,23 +11,50 @@
       <span class="sr-only">(current)</span>
     <% end %>
   </li>
-<% items.each do |item| %>
-  <% active = hash[type].to_s == item.to_s %>
-  <% if active %>
-  <li class="page-item active">
-  <% else %>
-  <li class="page-item">
+<% max_items_visible = 3 %>
+<% active_item = hash[type].to_i %>
+<% items.each_with_index do |item, i| %>
+  <% active = active_item == item %>
+  <% link_to_label = time_unit_to_str(type, item) %>
+  <% hash_clone = hash.clone %>
+  <% hash_clone[type] = item %>
+  <% if !(hash_clone[:month] == 'all') %>
+    <% hash_clone[:month] = get_existing_month(hash_clone[:year], hash_clone[:month]) %>
   <% end %>
-    <% hash_clone = hash.clone %>
-    <% hash_clone[type] = item %>
-    <% if !(hash_clone[:month] == 'all') %>
-      <% hash_clone[:month] = get_existing_month(hash_clone[:year], hash_clone[:month]) %>
-    <% end %>
-    <% link_to_label = type == :month ? Date::MONTHNAMES[item] : item %>
-    <%= link_to link_to_label, time_entries_path(hash_clone), class: 'page-link' %>
+
+  <% if i < max_items_visible %>
     <% if active %>
-      <span class="sr-only">(current)</span>
+    <li class="page-item active">
+    <% else %>
+    <li class="page-item">
     <% end %>
-  </li>
+
+      <%= link_to link_to_label, time_entries_path(hash_clone), class: 'page-link' %>
+      <% if active %>
+        <span class="sr-only">(current)</span>
+      <% end %>
+    </li>
+  <% elsif i == max_items_visible %>
+    <% dropdown_class = 'page-item dropdown' %>
+    <% if items.index(active_item) >= max_items_visible %>
+      <% active_link = time_unit_to_str(type, active_item) %>
+        <% dropdown_class += ' active' %>
+    <% else %>
+      <% active_link = '...' %>
+    <% end %>
+    <li class='<%= dropdown_class %>'>
+        <div class="dropdown-toggle page-link" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= active_link %>
+        </div>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <%= link_to link_to_label, time_entries_path(hash_clone), class: 'dropdown-item' %>
+  <% else %>
+            <%= link_to link_to_label, time_entries_path(hash_clone), class: 'dropdown-item' %>
+    <% if i == items.size - 1 %>
+          </div>
+      </li>
+    <% end %>
+  <% end %>
+
 <% end %>
 </ul>

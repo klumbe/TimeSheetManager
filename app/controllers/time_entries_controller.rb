@@ -8,7 +8,7 @@ class TimeEntriesController < ApplicationController
     year_list = TimeEntry.where(user_id: current_user.id).select(:date).order(date: :desc).group_by { |te| te.date.year }
     @years = year_list.keys
 
-    time_entries_all = TimeEntry.where(user_id: current_user.id).order(date: :asc)
+    time_entries_all = TimeEntry.where(user_id: current_user.id).order(date: :desc)
     @time_entries = time_entries_all
 
     # create filter-hash for maintaining current filter
