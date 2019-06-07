@@ -18,7 +18,11 @@ class TimeEntriesController < ApplicationController
     if params[:year]
       @year = params[:year]
     elsif !params[:month]
-      @year = year_list.keys.first
+      if @years_order == :desc
+        @year = year_list.keys.first
+      else
+        @year = year_list.keys.last
+      end
     end
 
     @filter[:year] = @year
@@ -33,7 +37,7 @@ class TimeEntriesController < ApplicationController
         @time_entries = @time_entries.in_month(@month)
       end
     elsif !params[:year]
-      @month = @months.last
+      @month = @months.first
     end
 
     if !@month.nil?
