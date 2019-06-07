@@ -32,10 +32,16 @@ module TimeEntriesHelper
   # check if it is the last entry of the month and if the list contains more entries
   # used to insert separation line between months
   def requires_month_separation?(date, pos, list_size)
-    last_day = date.day == Time.days_in_month(date.month, date.year)
+    day_at_border = false
     last_item = pos == (list_size - 1)
 
-    return (!last_item && last_day)
+    if @time_entries_order == :asc
+      day_at_border = date.day == Time.days_in_month(date.month, date.year)
+    else
+      day_at_border = date.day == 1
+    end
+
+    return (!last_item && day_at_border)
   end
 
   # returns the string representation of months or years

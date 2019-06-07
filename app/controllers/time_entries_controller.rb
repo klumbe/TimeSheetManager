@@ -5,10 +5,11 @@ class TimeEntriesController < ApplicationController
   # GET /time_entries
   # GET /time_entries.json
   def index
-    year_list = TimeEntry.where(user_id: current_user.id).select(:date).order(date: :desc).group_by { |te| te.date.year }
+    @years_order = @time_entries_order = :desc
+    year_list = TimeEntry.where(user_id: current_user.id).select(:date).order(date: @years_order).group_by { |te| te.date.year }
     @years = year_list.keys
 
-    time_entries_all = TimeEntry.where(user_id: current_user.id).order(date: :desc)
+    time_entries_all = TimeEntry.where(user_id: current_user.id).order(date:  @time_entries_order)
     @time_entries = time_entries_all
 
     # create filter-hash for maintaining current filter
