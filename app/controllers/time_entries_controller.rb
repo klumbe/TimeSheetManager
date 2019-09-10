@@ -32,7 +32,7 @@ class TimeEntriesController < ApplicationController
     end
     @months = @time_entries.group_by {|te| te.date.month }.keys
 
-    if params[:month] && params[:month].match(/\d+/)
+    if params[:month] && params[:month].match(/\d+|all/)
       @month = params[:month]
       if !@month.nil? && !(@month == 'all')
         @time_entries = @time_entries.in_month(@month)
