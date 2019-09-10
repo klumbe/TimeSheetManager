@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '~> 2.6.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.0'
+gem 'rails', '~> 6.0.0'
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3'
 # Use postgresql
@@ -18,12 +18,15 @@ gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
 
+# Use webpacker as JavaScript compiler
+gem 'webpacker', '~> 4.0.0'
+
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.2'
+gem 'coffee-rails', '~> 5.0'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.5'
+gem 'jbuilder', '~> 2.9'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
@@ -55,9 +58,7 @@ end
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15', '< 4.0'
-  gem 'selenium-webdriver'
-  # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'chromedriver-helper'
+  gem 'webdrivers', '~> 4.1.0'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -68,7 +69,7 @@ gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'
 
 # Add Devise for user authentication
-gem 'devise', '~> 4.5.0'
+gem 'devise', '~> 4.7.0'
 
 # Add FontAwesome capabilities
-gem 'font-awesome-sass', '~> 5.5.0'
+gem 'font-awesome-sass', '~> 5.9.0'
