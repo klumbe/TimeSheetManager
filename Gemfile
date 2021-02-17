@@ -1,25 +1,25 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '~> 2.6.1'
+ruby '~> 3.0.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0.0'
+gem 'rails', '~> 6.1.0'
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3'
 # Use postgresql
-gem 'pg', '~> 1.1.4'
+gem 'pg', '~> 1.2.3'
 # Use Puma as the app server
-gem 'puma', '~> 3.11'
+gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
-gem 'sassc-rails', '~> 2.1'
+gem 'sassc-rails', '~> 2.1.2'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
 
 # Use webpacker as JavaScript compiler
-gem 'webpacker', '~> 4.0.0'
+gem 'webpacker', '~> 5.2.0'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 5.0'
@@ -61,15 +61,15 @@ group :test do
   gem 'webdrivers', '~> 4.1.0'
 end
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+# Windows does not include zoneinfo files, so1bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Add Bootstrap requirements
-gem 'bootstrap', '~> 4.3.1'
+gem 'bootstrap', '~> 4.6.0'
 gem 'jquery-rails'
 
 # Add Devise for user authentication
 gem 'devise', '~> 4.7.0'
 
 # Add FontAwesome capabilities
-gem 'font-awesome-sass', '~> 5.9.0'
+gem 'font-awesome-sass', '~> 5.15.0'
