@@ -17,7 +17,7 @@ WORKDIR /app
 
 RUN gem update --system
 COPY Gemfile Gemfile.lock ./
-RUN gem install bundler && bundle install
+RUN gem install bundler -v 1.17.3 && bundle install
 
 EXPOSE 3000
 

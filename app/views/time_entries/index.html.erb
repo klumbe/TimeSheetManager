@@ -1,41 +1,48 @@
 <h1>Time Entries</h1>
 
 <%= render 'pagination' %>
-<table class="table table-striped table-hover">
-  <thead class="thead-light">
+<table class='table table-striped table-hover'>
+  <thead class='thead-light'>
     <tr>
-      <th scope="col">Date</th>
-      <th scope="col">Start</th>
-      <th scope="col">End</th>
-      <th scope="col">Breaks</th>
-      <th scope="col">Total</th>
-      <th colspan="3" scope="col">Actions</th>
+      <th scope='col' class='date'>Date</th>
+      <th scope='col' class='time'>Start</th>
+      <th scope='col' class='time'>End</th>
+      <th scope='col' class='time'>Breaks</th>
+      <th scope='col' class='time'>Total</th>
+      <th scope='col' colspan='3' class='actions'>Actions</th>
     </tr>
   </thead>
 
   <tbody>
-    <% @time_entries.each_with_index do |time_entry, i| %>
-      <% if requires_month_separation?(time_entry.date, i, @time_entries.size) %>
-      <tr class = "tr_month_sep">
-      <% else %>
+  <% last_month = 'NONE' %>
+  <% @time_entries.each_with_index do |time_entry, i| %>
+  <% current_month = Date::MONTHNAMES[time_entry.date.month] %>
+  <% if current_month != last_month || last_month == 'NONE' %>
+  </tbody>
+  </table>
+  <hr class='sep_line'>
+  <span class='month_name'><%= current_month %><br><%= time_entry.date.year %></span>
+  <table class='table table-striped table-hover'>
+  <tbody>
+  <% end %>
       <tr>
-      <% end %>
-        <td><%= time_entry.date %></td>
-        <td><%= time_entry.start.to_formatted_s(:time) %></td>
-        <td><%= time_entry.end.to_formatted_s(:time)  %></td>
-        <td><%= time_entry.breaks.to_formatted_s(:time)  %></td>
-        <td><%= time_entry.total.to_formatted_s(:time) %></td>
-        <td>
+        <% last_month = current_month %>
+        <td class=' date'><%= time_entry.date %></td>
+        <td class=' time'><%= time_entry.start.to_formatted_s(:time) %></td>
+        <td class=' time'><%= time_entry.end.to_formatted_s(:time)  %></td>
+        <td class=' time'><%= time_entry.breaks.to_formatted_s(:time)  %></td>
+        <td class=' time'><%= time_entry.total.to_formatted_s(:time) %></td>
+        <td class=' link'>
           <%= link_to time_entry do %>
             <%= icon "far", "eye" %> Show
           <% end %>
         </td>
-        <td>
+        <td class=' link'>
           <%= link_to edit_time_entry_path(time_entry) do %>
             <%= icon "fa", "pen" %> Edit
           <% end %>
         </td>
-        <td>
+        <td class=' link'>
           <%= link_to time_entry, method: :delete, data: { confirm: 'Are you sure?' } do %>
             <%= icon "fa", "trash-alt" %> Destroy
           <% end %>
