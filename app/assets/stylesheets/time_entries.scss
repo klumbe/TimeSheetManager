@@ -15,8 +15,74 @@
   font-weight: bold;
 }
 
-table {
-  .tr_month_sep {
-    border-bottom: 2px solid darkgray;
-  }
+hr.sep_line {
+  border-width: 2px;
+  margin-left: -11rem;
+  margin-right: -11rem;
 }
+
+span.month_name {
+  position: absolute;
+  margin-left: -11rem;
+  width: 11rem;
+  color: gray;
+  letter-spacing: 0.2em;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+td, th {
+  text-align: center;
+}
+td.date, th.date {
+  min-width: 140px;
+}
+
+td.time, th.time {
+  min-width: 80px;
+}
+
+td.link {
+  min-width: 100px;
+}
+
+th.actions {
+  min-width: 300px;
+}
+/*
+.table-div {
+  display: table;
+  padding: 0px;
+  border-collapse: collapse;
+}
+
+.table-div:nth-child(2) {
+  background-color: rgba(0,0,0,0.5);
+}
+
+.table-row {
+  display: table-row;
+  width:100%;
+}
+
+.table-cell {
+  display: table-cell;
+  padding: 0.75rem;
+  text-align: center;
+}
+
+.table-head {
+  font-weight: bold;
+  background-color: rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+.actions {
+  width: 100%;
+}
+
+.link {
+  padding: 0px 0.75rem;
+}
+*/
