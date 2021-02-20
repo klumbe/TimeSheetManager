@@ -180,6 +180,8 @@ GEM
       actionpack (>= 5.0)
       railties (>= 5.0)
     rubyzip (2.3.0)
+    sass-rails (6.0.0)
+      sassc-rails (~> 2.1, >= 2.1.1)
     sassc (2.4.0)
       ffi (~> 1.9)
     sassc-rails (2.1.2)
@@ -252,7 +254,7 @@ DEPENDENCIES
   pg (~> 1.2.3)
   puma (~> 5.0)
   rails (~> 6.1.0)
-  sassc-rails (~> 2.1.2)
+  sass-rails (>= 6)
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)
