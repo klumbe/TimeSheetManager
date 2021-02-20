@@ -19,7 +19,7 @@ gem 'uglifier', '>= 1.3.0'
 # gem 'mini_racer', platforms: :ruby
 
 # Use webpacker as JavaScript compiler
-gem 'webpacker', '~> 5.2.0'
+gem 'webpacker', '~> 5.x'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 5.0'
